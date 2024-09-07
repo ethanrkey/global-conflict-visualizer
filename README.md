@@ -1,1 +1,1 @@
-A global conflict visualization tool
+An interactive global conflict visualization tool
