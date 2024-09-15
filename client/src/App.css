@@ -8,3 +8,16 @@
   font-size: calc(10px + 2vmin);
   color: white;
 }
+
+.map-wrapper {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.map-container {
+  width: 400px; /* Set width */
+  height: 300px; /* Set height */
+  border: 2px solid #000; /* Optional border for styling */
+  border-radius: 8px; /* Optional rounded corners */
+}
