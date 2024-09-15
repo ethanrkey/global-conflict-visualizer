@@ -1,36 +1,51 @@
 import React from 'react';
+import { FormControl, InputLabel, Select, MenuItem, Slider, Typography, Box } from '@mui/material';
 
 const Sidebar = ({ filters, onFiltersChange }) => {
-  const handleYearChange = (e) => {
-    const value = [parseInt(e.target.value, 10), filters.year[1]];
-    onFiltersChange({ ...filters, year: value });
+  const handleYearChange = (event, newValue) => {
+    onFiltersChange({ ...filters, year: newValue });
   };
 
-  const handleTypeChange = (e) => {
-    onFiltersChange({ ...filters, conflictType: e.target.value });
+  const handleTypeChange = (event) => {
+    onFiltersChange({ ...filters, conflictType: event.target.value });
   };
 
   return (
-    <div className="sidebar">
-      <h3>Filters</h3>
-      <label>Conflict Type:</label>
-      <select value={filters.conflictType} onChange={handleTypeChange}>
-        <option value="all">All</option>
-        <option value="military">Military</option>
-        <option value="economic">Economic</option>
-        <option value="geopolitical">Geopolitical</option>
-      </select>
+    <Box className="sidebar" sx={{ width: 250, padding: 2 }}>
+      <Typography variant="h6" gutterBottom>
+        Filters
+      </Typography>
 
-      <label>Year Range:</label>
-      <input
-        type="range"
-        min="2000"
-        max="2024"
-        value={filters.year[0]}
+      {/* Conflict Type Dropdown */}
+      <FormControl fullWidth margin="normal">
+        <InputLabel id="conflict-type-label">Conflict Type</InputLabel>
+        <Select
+          labelId="conflict-type-label"
+          value={filters.conflictType}
+          onChange={handleTypeChange}
+          label="Conflict Type"
+        >
+          <MenuItem value="all">All</MenuItem>
+          <MenuItem value="military">Military</MenuItem>
+          <MenuItem value="economic">Economic</MenuItem>
+          <MenuItem value="geopolitical">Geopolitical</MenuItem>
+        </Select>
+      </FormControl>
+
+      {/* Year Range Slider */}
+      <Typography gutterBottom>Year Range</Typography>
+      <Slider
+        value={filters.year}
         onChange={handleYearChange}
+        valueLabelDisplay="auto"
+        min={2000}
+        max={2024}
+        marks={[
+          { value: 2000, label: '2000' },
+          { value: 2024, label: '2024' },
+        ]}
       />
-      <span>{filters.year[0]} - {filters.year[1]}</span>
-    </div>
+    </Box>
   );
 };
 

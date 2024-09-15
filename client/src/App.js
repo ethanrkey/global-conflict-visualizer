@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Sidebar from './components/Sidebar';
 import Map from './components/Map';
 import './App.css';
+import { AppBar, Toolbar, Typography, Box } from '@mui/material';
 import mockData from './mockData';
 
 const App = () => {
@@ -16,15 +17,19 @@ const App = () => {
   };
 
   return (
-    <div className="App">
-      <header className="App-header">
-        <h1>Global Conflict Visualizer</h1>
-      </header>
-      <div className="App-body">
+    <Box className="App">
+      <AppBar position="static">
+        <Toolbar>
+          <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+            Global Conflict Visualizer
+          </Typography>
+        </Toolbar>
+      </AppBar>
+      <Box className="App-body" display="flex">
         <Sidebar filters={filters} onFiltersChange={handleFiltersChange} />
         <Map data={mockData} filters={filters} />
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 };
 
