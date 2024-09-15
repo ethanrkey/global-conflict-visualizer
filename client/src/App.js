@@ -1,39 +1,31 @@
-import React from 'react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import 'leaflet/dist/leaflet.css';
-import './App.css'; // Import the CSS file
+import React, { useState } from 'react';
+import Sidebar from './components/Sidebar';
+import Map from './components/Map';
+import './App.css';
+import mockData from './mockData';
 
-// MapExample component definition with adjusted map size
-const MapExample = () => {
-    const position = [51.505, -0.09]; // Example position: latitude and longitude
+const App = () => {
+  const [filters, setFilters] = useState({
+    year: [2000, 2024],
+    conflictType: 'all',
+  });
 
-    return (
-        <div className="map-wrapper">
-            <MapContainer center={position} zoom={13} className="map-container">
-                <TileLayer
-                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                />
-                <Marker position={position}>
-                    <Popup>
-                        A simple popup example.
-                    </Popup>
-                </Marker>
-            </MapContainer>
-        </div>
-    );
-};
+  // Function to handle filter updates
+  const handleFiltersChange = (newFilters) => {
+    setFilters(newFilters);
+  };
 
-// App component that includes the MapExample
-function App() {
   return (
     <div className="App">
       <header className="App-header">
         <h1>Global Conflict Visualizer</h1>
       </header>
-      <MapExample /> {/* Include the map */}
+      <div className="App-body">
+        <Sidebar filters={filters} onFiltersChange={handleFiltersChange} />
+        <Map data={mockData} filters={filters} />
+      </div>
     </div>
   );
-}
+};
 
 export default App;
