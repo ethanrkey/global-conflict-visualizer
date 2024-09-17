@@ -1,14 +1,17 @@
+html {
+  scroll-behavior: smooth; /* Enables smooth scrolling */
+}
+
 .App {
   display: flex;
   flex-direction: column;
-  height: 100vh;
 }
 
-.App-header {
-  background-color: #282c34;
-  padding: 20px;
-  color: white;
-  text-align: center;
+.about-section,
+.map-section,
+.sources-section {
+  min-height: 100vh;
+  padding: 40px;
 }
 
 .App-body {
@@ -25,6 +28,7 @@
 .map-container {
   flex: 1;
   position: relative;
+  height: 85vh; /* Double the height of the map container */
 }
 
 .map-container .leaflet-container {
